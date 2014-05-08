@@ -188,7 +188,7 @@ public class CreateGameActivity extends Activity {
 		}
 		
 	};
-	
+
 	/*
 	private PeerListListener peerListListener = new PeerListListener()
 	{
@@ -213,6 +213,7 @@ public class CreateGameActivity extends Activity {
 		}
 	}
 	*/
+	
 	
 	/*
 	private class DeviceListDialog extends DialogFragment {
