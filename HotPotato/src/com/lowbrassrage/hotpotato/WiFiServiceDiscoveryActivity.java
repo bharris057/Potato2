@@ -23,6 +23,7 @@ import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lowbrassrage.hotpotato.WiFiChatFragment.MessageTarget;
 import com.lowbrassrage.hotpotato.WiFiDirectServicesList.DeviceClickListener;
@@ -82,23 +83,25 @@ public class WiFiServiceDiscoveryActivity extends Activity implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.activity_main);
+
         statusTxtView = (TextView) findViewById(R.id.status_text);
 
         intentFilter.addAction(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION);
         intentFilter.addAction(WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION);
-        intentFilter
-                .addAction(WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION);
-        intentFilter
-                .addAction(WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION);
+        intentFilter.addAction(WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION);
+        intentFilter.addAction(WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION);
 
         manager = (WifiP2pManager) getSystemService(Context.WIFI_P2P_SERVICE);
         channel = manager.initialize(this, getMainLooper(), null);
         startRegistrationAndDiscovery();
 
+        //Toast toast = Toast.makeText(getApplicationContext(), "After startRegistrationAndDiscovery", Toast.LENGTH_SHORT);
+        //toast.show();
+        
+        
         servicesList = new WiFiDirectServicesList();
-        getFragmentManager().beginTransaction()
-                .add(R.id.container_root, servicesList, "services").commit();
+        getFragmentManager().beginTransaction().add(R.id.container_root, servicesList, "services").commit();
 
     }
 
@@ -134,6 +137,7 @@ public class WiFiServiceDiscoveryActivity extends Activity implements
      * Registers a local service and then initiates a service discovery
      */
     private void startRegistrationAndDiscovery() {
+    	
         Map<String, String> record = new HashMap<String, String>();
         record.put(TXTRECORD_PROP_AVAILABLE, "visible");
 
@@ -151,7 +155,11 @@ public class WiFiServiceDiscoveryActivity extends Activity implements
                 appendStatus("Failed to add a service");
             }
         });
-
+        
+        
+        //Toast toast = Toast.makeText(getApplicationContext(), "Before discoverService", Toast.LENGTH_SHORT);
+        //toast.show();
+        
         discoverService();
 
     }

@@ -41,7 +41,7 @@ public class MainActivity extends ActionBarActivity {
     		// This is actually how Android is supposed to handle multiple pages. 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(MainActivity.this, WiFiDirectActivity.class);
+				Intent intent = new Intent(MainActivity.this, WiFiServiceDiscoveryActivity.class);
 				startActivity(intent);
 			}
 		});
