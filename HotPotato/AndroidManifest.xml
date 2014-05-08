@@ -68,6 +68,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.lowbrassrage.hotpotato.MainActivity" />
         </activity>
+        
+        <activity
+            android:name="com.lowbrassrage.hotpotato.WiFiDirectActivity"
+            android:label="@string/hello_world"
+            android:parentActivityName="com.lowbrassrage.hotpotato.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.lowbrassrage.hotpotato.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

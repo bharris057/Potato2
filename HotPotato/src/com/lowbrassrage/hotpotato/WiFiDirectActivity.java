@@ -48,9 +48,13 @@ public class WiFiDirectActivity extends Activity implements ChannelListener, Dev
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
+        Toast toast = Toast.makeText(getApplicationContext(), "Lord of the RINGS!!!", Toast.LENGTH_SHORT);
+        toast.show();
+        
         //not sure if this is correct 
         //it used to say R.layout.main
-        setContentView(R.layout.main_screen);
+        setContentView(R.layout.activity_main);
+        
 
         // add necessary intent values to be matched.
 

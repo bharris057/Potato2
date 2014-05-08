@@ -41,7 +41,7 @@ public class MainActivity extends ActionBarActivity {
     		// This is actually how Android is supposed to handle multiple pages. 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(MainActivity.this, CreateGameActivity.class);
+				Intent intent = new Intent(MainActivity.this, WiFiDirectActivity.class);
 				startActivity(intent);
 			}
 		});
@@ -104,7 +104,7 @@ public class MainActivity extends ActionBarActivity {
     		// This is actually how Android is supposed to handle multiple pages. 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(MainActivity.this, MainPageSettingsActivity.class);
+				Intent intent = new Intent(MainActivity.this, CreateGameActivity.class);
 				startActivity(intent);
 			}
 		});
