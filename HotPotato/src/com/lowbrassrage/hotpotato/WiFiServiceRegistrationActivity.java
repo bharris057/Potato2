@@ -44,7 +44,7 @@ import java.util.Map;
  * {@code WiFiChatFragment} is then added to the the main activity which manages
  * the interface and messaging needs for a chat session.
  */
-public class WiFiServiceDiscoveryActivity extends Activity implements
+public class WiFiServiceRegistrationActivity extends Activity implements
         DeviceClickListener, Handler.Callback, MessageTarget, ConnectionInfoListener {
 
     public static final String TAG = "wifidirectdemo";
@@ -67,7 +67,7 @@ public class WiFiServiceDiscoveryActivity extends Activity implements
 
     private Handler handler = new Handler(this);
     private WiFiChatFragment chatFragment;
-    private WiFiDirectServicesList servicesList;
+    //private WiFiDirectServicesList servicesList;
 
     private TextView statusTxtView;
 
@@ -96,17 +96,12 @@ public class WiFiServiceDiscoveryActivity extends Activity implements
         channel = manager.initialize(this, getMainLooper(), null);
         startRegistrationAndDiscovery();
 
-        servicesList = new WiFiDirectServicesList();
+        //Toast toast = Toast.makeText(getApplicationContext(), "After startRegistrationAndDiscovery", Toast.LENGTH_SHORT);
+        //toast.show();
         
-        Toast toast = Toast.makeText(getApplicationContext(), "serviceList initialized", Toast.LENGTH_SHORT);
-        toast.show();
         
-        for (int i = 0; i < servicesList.listLength; i++)
-        {
-        	appendStatus(servicesList.mItems.get(i).instanceName);
-        }
-        
-        getFragmentManager().beginTransaction().add(R.id.container_root, servicesList, "services").commit();
+        //servicesList = new WiFiDirectServicesList();
+        //getFragmentManager().beginTransaction().add(R.id.container_root, servicesList, "services").commit();
 
     }
 
@@ -146,15 +141,13 @@ public class WiFiServiceDiscoveryActivity extends Activity implements
         Map<String, String> record = new HashMap<String, String>();
         record.put(TXTRECORD_PROP_AVAILABLE, "visible");
 
-        /*
         WifiP2pDnsSdServiceInfo service = WifiP2pDnsSdServiceInfo.newInstance(
                 SERVICE_INSTANCE, SERVICE_REG_TYPE, record);
-        
         manager.addLocalService(channel, service, new ActionListener() {
 
             @Override
             public void onSuccess() {
-                appendStatus("Added Local Service");
+                appendStatus("Added Local Service " + SERVICE_INSTANCE);
             }
 
             @Override
@@ -162,21 +155,22 @@ public class WiFiServiceDiscoveryActivity extends Activity implements
                 appendStatus("Failed to add a service");
             }
         });
-        */
+        
         
         //Toast toast = Toast.makeText(getApplicationContext(), "Before discoverService", Toast.LENGTH_SHORT);
         //toast.show();
         
-        discoverService();
+        //discoverService();
 
     }
 
+    /*
     private void discoverService() {
 
-        /*
-         * Register listeners for DNS-SD services. These are callbacks invoked
-         * by the system when a service is actually discovered.
-         */
+       
+         // Register listeners for DNS-SD services. These are callbacks invoked
+         // by the system when a service is actually discovered.
+        
 
         manager.setDnsSdResponseListeners(channel,
                 new DnsSdServiceResponseListener() {
@@ -209,10 +203,10 @@ public class WiFiServiceDiscoveryActivity extends Activity implements
                     }
                 }, new DnsSdTxtRecordListener() {
 
-                    /**
-                     * A new TXT record is available. Pick up the advertised
-                     * buddy name.
-                     */
+                    
+                     // A new TXT record is available. Pick up the advertised
+                     // buddy name.
+                     
                     @Override
                     public void onDnsSdTxtRecordAvailable(
                             String fullDomainName, Map<String, String> record,
@@ -253,7 +247,10 @@ public class WiFiServiceDiscoveryActivity extends Activity implements
             }
         });
     }
+    
+    */
 
+    
     @Override
     public void connectP2p(WiFiP2pService service) {
         WifiP2pConfig config = new WifiP2pConfig();
@@ -285,7 +282,10 @@ public class WiFiServiceDiscoveryActivity extends Activity implements
             }
         });
     }
-
+    
+    
+    
+    
     @Override
     public boolean handleMessage(Message msg) {
         switch (msg.what) {
@@ -305,6 +305,8 @@ public class WiFiServiceDiscoveryActivity extends Activity implements
         return true;
     }
 
+	
+    
     @Override
     public void onResume() {
         super.onResume();
@@ -318,14 +320,16 @@ public class WiFiServiceDiscoveryActivity extends Activity implements
         unregisterReceiver(receiver);
     }
 
+    
+    
     @Override
     public void onConnectionInfoAvailable(WifiP2pInfo p2pInfo) {
         Thread handler = null;
-        /*
-         * The group owner accepts connections using a server socket and then spawns a
-         * client socket for every client. This is handled by {@code
-         * GroupOwnerSocketHandler}
-         */
+        
+         // The group owner accepts connections using a server socket and then spawns a
+         // client socket for every client. This is handled by {@code
+         // GroupOwnerSocketHandler}
+         
 
         if (p2pInfo.isGroupOwner) {
             Log.d(TAG, "Connected as group owner");
@@ -350,6 +354,8 @@ public class WiFiServiceDiscoveryActivity extends Activity implements
                 .replace(R.id.container_root, chatFragment).commit();
         statusTxtView.setVisibility(View.GONE);
     }
+	
+	
 
     public void appendStatus(String status) {
         String current = statusTxtView.getText().toString();
